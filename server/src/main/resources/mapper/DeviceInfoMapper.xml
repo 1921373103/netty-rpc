@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpc.server.mapper.DeviceInfoMapper">
+
+    <resultMap id="deviceResult" type="com.rpc.server.entity.DeviceInfo">
+        <result property="sn" column="sn"/>
+        <result property="ip" column="ip"/>
+        <result property="port" column="port"/>
+        <result property="info" column="info"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <sql id="selectVo">
+        select sn, ip, port, info, type from device_info
+    </sql>
+
+    <select id="list" parameterType="com.rpc.server.entity.DeviceInfo" resultMap="deviceResult">
+        <include refid="selectVo"/>
+        <where>
+            <if test="sn != null">sn = #{sn},</if>
+            <if test="ip != null">sn = #{ip},</if>
+            <if test="port != null">sn = #{port},</if>
+            <if test="info != null and info != ''">sn = #{info},</if>
+            <if test="type != null">sn = #{type},</if>
+        </where>
+    </select>
+
+</mapper>
